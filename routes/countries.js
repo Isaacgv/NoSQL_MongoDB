@@ -62,7 +62,7 @@ router.put('/:id', async (request, response) => {
 });
 
 
-//Get all Country where a letter or word given is in the name
+//Question 1: Get all Country where a letter or word given is in the name
 router.get('/search/:word', async (request, response) => {
 
     const searchWord = request.params.word
@@ -76,7 +76,7 @@ router.get('/search/:word', async (request, response) => {
     response.status(200).json(countries);
 });
 
-//Get all  the countries order by number of people first the less populated and las the mos populated
+//Question 6: Get all  the countries order by number of people first the less populated and las the mos populated
 router.get('/population', async (request, response) => {
 
     const continents = await CountryModel.aggregate(
@@ -86,7 +86,7 @@ router.get('/population', async (request, response) => {
     response.status(200).json(continents);
 });
 
-//Get countries which haa a u in their name an more 100 000 people inside
+//Question 7: Get countries which haa a u in their name an more 100 000 people inside
 router.get('/filter', async (request, response) => {
 
     const regex = new RegExp("u", 'i') 
@@ -102,18 +102,3 @@ router.get('/filter', async (request, response) => {
 
 module.exports = router;
 
-
-
-
-
-router.get('/letter/:letter', async (request, response) => {
-
-    const searchWord = request.params.letter
-    const regex = new RegExp(searchWord, 'i') 
-
-    const countries = await CountryModel.find({
-        name : {$regex: regex}
-    });
-    
-    response.status(200).json(countries);
-});

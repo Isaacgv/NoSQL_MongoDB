@@ -25,7 +25,7 @@ router.post('/', async (request, response) => {
 
 
 
-//Link continent to contries
+//Question 2: Link continent to contries
 router.post('/:continentId/:countryId', async (request, response) => {
     const continentId = request.params.continentId;
     const countryId = request.params.countryId;
@@ -48,7 +48,7 @@ router.post('/:continentId/:countryId', async (request, response) => {
 
 
 
-//List of contients with thre number of countries
+//Question 3: List of contients with thre number of countries
 router.get('/numberCountries', async (request, response) => {
     
     const continents = await ContinentModel.aggregate(
@@ -60,7 +60,7 @@ router.get('/numberCountries', async (request, response) => {
     response.status(200).json(continents);
 });
 
-//Send back the fourth countries of a continrnt by alphabetic order
+//Question 4: Send back the fourth countries of a continrnt by alphabetic order
 router.get('/sortCountries/:id', async (request, response) => {
     const continentId = mongoose.Types.ObjectId(request.params.id);
     const continents = await ContinentModel.aggregate(
